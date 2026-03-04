@@ -1,0 +1,7 @@
+git init: Initialize the git (only once)
+          sourse-control -> click "initialize repostry". ===> this will create ".git"
+git add: adds the changes to the staging area
+          sourse-control -> click the '+' in the stanges section
+
+          git commit: Saves the staging changes to the local repository
+          
