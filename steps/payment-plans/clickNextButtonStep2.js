@@ -1,24 +1,77 @@
 import { Given, Then, When } from "@cucumber/cucumber";
-import { expect} from "@playwright/test";
-import { paymentPlanPage, page } from "../../globalPagesSetup.js";
-import { productInfo } from "../../utilities/qa-data-reader.js";
-
+import { startApplicationPage, paymentPlanPage } from "../../globalPagesSetup.js";
+import { expect } from "@playwright/test";
 // const { Given, When, Then } = require('@cucumber/cucumber');
 
-Given('user has completed step one with valid information', async function () {
+
+
+Then('the next button on payment plan page should be disabled by default', async function () {
+     await expect(paymentPlanPage.inactiveNextButton).toBeVisible();
+    await expect(paymentPlanPage.inactiveNextButton).toBeDisabled();
+
 });
 
-Given('user is on step two of the enrollment process', async function () {
+When('the user selects a payment plan', async function () {
+   await paymentPlanPage.selectPaymentPlan('upfront');
 });
 
-Then('the next button is disabled by default', async function () {
+Then('the next button on payment plan page should become active', async function () {
+    await expect(paymentPlanPage.activeNextButton).toBeVisible();
+    await expect(paymentPlanPage.activeNextButton).toBeEnabled();
 });
 
-When('user clicks upfront payment option', async function () {
+
+
+Then('the steps2 stepper should be blue', async function () {
+    await expect(startApplicationPage.paymentPlanStepCircle).toHaveCSS('background-color', 'rgb(1, 201, 255)'); // Assuming blue color is rgb(0, 123, 255)
 });
 
-Then('the next button will be enabled', async function () {
+When('the user clicks the next button on payment plan page', async function () {
+    await paymentPlanPage.clickNextButton();
 });
 
-When('user clicks installments payment option', async function () {
+Then('the steps1 stepper should be green', async function () {
+    await expect(startApplicationPage.startApplicationStepCircle).toHaveCSS('background-color', 'rgb(172, 245, 138)'); // Assuming green color is rgb(40, 167, 69)
 });
+
+Then('the steps2 stepper should be green', async function () {
+    await expect(startApplicationPage.paymentPlanStepCircle).toHaveCSS('background-color', 'rgb(172, 245, 138)'); // Assuming green color is rgb(40, 167, 69)
+});
+
+Then('the step3 stepper should be blue', async function () {
+    await expect(startApplicationPage.reviewStepCircle).toHaveCSS('background-color', 'rgb(1, 201, 255)'); // Assuming blue color is rgb(0, 123, 255)
+});
+
+
+
+Then('the upfront payment plan summary should be displayed', async function () {
+    await expect(paymentPlanPage.basePriceAmountUnderUpfrontPlan).toBeVisible();
+    await expect(paymentPlanPage.upfrontDiscountAmountUnderUpfront).toBeVisible();
+    await expect(paymentPlanPage.subtotalAmountUnderUpfront).toBeVisible();
+});
+
+When('the user selects Installments payment plan', async function () {
+ await paymentPlanPage.selectPaymentPlan('installments');
+});
+
+Then('the installement plan summary should be displayed', async function () {
+await expect(paymentPlanPage.basePriceAmountUnderInstallments).toBeVisible();
+    await expect(paymentPlanPage.installmentsNumberUnderInstallments).toBeVisible();
+    await expect(paymentPlanPage.pricePerInstallmentsAmountUnderInstallments).toBeVisible();
+    await expect(paymentPlanPage.firstMonthPaymentAmountUnderInstallments).toBeVisible();
+});
+
+Then('the back button is disabled', async function () {
+    await expect(paymentPlanPage.backButton).toBeVisible();
+    await expect(paymentPlanPage.backButton).toBeDisabled();
+
+});
+
+When('the user clicks the back button', async function () {
+    await paymentPlanPage.backButton.click();
+});
+
+Then('the steps1 stepper should be blue', async function () {
+    await expect(startApplicationPage.startApplicationStepCircle).toHaveCSS('background-color', 'rgb(1, 201, 255)'); // Assuming blue color is rgb(0, 123, 255)
+});
+

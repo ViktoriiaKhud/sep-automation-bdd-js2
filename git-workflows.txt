@@ -1,7 +1,23 @@
 git init: Initialize the git (only once)
           sourse-control -> click "initialize repostry". ===> this will create ".git"
+
 git add: adds the changes to the staging area
           sourse-control -> click the '+' in the stanges section
 
-          git commit: Saves the staging changes to the local repository
-          
+git commit: Saves the staging changes to the local repository
+          sourse-control -> Click "Commit" button after entering commit 
+
+git fetch & pull: checks the chnages from remote repo & pulls them into local repo
+        source-control -> and click "..." of CHANGES -> fetch, then pull
+
+git checkout:    switches to a different branch
+        Click on the branch name bottom left corner of VS code, then select the branch
+
+============================
+
+Template Framework:
+        Structure: HyBrid (UI + API) Playwright TDD 
+        Language: TypeScript
+        Design: Page Object Module
+        CI Piplines: GitHub Action
+        Global Config: Pareallel, Cross Browser, Video, Trace. 
