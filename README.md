@@ -24,7 +24,7 @@ To install necessary libraries, open your terminal and run:
 npm install
 ```
 <br>
-
+  
 ## Environment Setup
 
 ### 1. Download the "sep-automation" Project Zip Folder
