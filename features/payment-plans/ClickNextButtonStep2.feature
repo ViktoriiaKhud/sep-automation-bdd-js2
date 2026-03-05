@@ -12,33 +12,34 @@ Feature: Click on the next button on payment plans page   #! Test Only
     #* AC7: By default, the pay button should be displayed.
 
 
-Background: 
-Given user is on the enrollment page
-And user has completed step one with valid information
-And user is on step two of the enrollment process
-
-
-    #TODO: Create scenarios that cover all the acceptance criteria
-
-
-    Scenario: verify that the next button is disabled by default
+    Background:
         Given user is on the enrollment page
-        And user has completed step one with valid information
-        And user is on step two of the enrollment process
-        Then the next button is disabled by default
+        And user completed the start application step
 
+    @sep16-1
+    Scenario: verify that Clicking on any plan should activate the next button
+        Then the next button on payment plan page should be disabled by default
+        When the user selects a payment plan
+        Then the next button on payment plan page should become active
 
-    Scenario: verify that the next button will be activated when user selects upfront payment option
-        Given user is on the enrollment page
-        And user has completed step one with valid information
-        And user is on step two of the enrollment process
-        When user clicks upfront payment option
-        Then the next button will be enabled
+    @sep16-2
+    Scenario: verify that after clicking next button, the Step 3 page should be displayed
+        Then the steps2 stepper should be blue
+        When the user selects a payment plan
+        And the user clicks the next button on payment plan page
+        Then the steps1 stepper should be green
+        And the steps2 stepper should be green
+        And the step3 stepper should be blue
 
+    @sep16-3
+    Scenario: verify that payment plan summary is displayed when a payment plan is selected
+        When the user selects a payment plan
+        Then the upfront payment plan summary should be displayed
+        When the user selects Installments payment plan
+        Then the installement plan summary should be displayed
 
-    Scenario: verify that the next button will be activated when user selects installments payment option
-        Given user is on the enrollment page
-        And user has completed step one with valid information
-        And user is on step two of the enrollment process
-        When user clicks installments payment option
-        Then the next button will be enabled
+    @sep16-4
+    Scenario: verify that the back button is displayed and enabled
+        Then the back button is disabled
+        When the user clicks the back button
+        Then the steps1 stepper should be blue
